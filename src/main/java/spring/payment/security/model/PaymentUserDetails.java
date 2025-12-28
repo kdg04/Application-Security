@@ -16,7 +16,7 @@ public class PaymentUserDetails implements UserDetails {
 	private String username;
 	private String password;
 	private List<GrantedAuthority> roles;  // this is Spring understood list of interfaces
-	private Float balance;
+	private Double balance;
 	
     public PaymentUserDetails(User user) {
     	this.username = user.getUserName();
@@ -44,7 +44,7 @@ public class PaymentUserDetails implements UserDetails {
 		return username;
 	}
 	
-	public Float getBalance() {
+	public Double getBalance() {
 		return balance;
 	}
 	

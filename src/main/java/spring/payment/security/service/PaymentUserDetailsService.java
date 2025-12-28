@@ -3,13 +3,14 @@ package spring.payment.security.service;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import spring.payment.security.entity.User;
 import spring.payment.security.model.PaymentUserDetails;
 import spring.payment.security.repository.UserRepository;
 
-@Service
+@Component
 public class PaymentUserDetailsService implements UserDetailsService {
 
     private UserRepository userRepository; 

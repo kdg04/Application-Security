@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import spring.payment.security.entity.User;
+import spring.payment.security.model.PaymentUserDetails;
 import spring.payment.security.repository.UserRepository;
 import spring.payment.security.service.UserService;
 
@@ -42,9 +44,10 @@ public class UserRestController {
 	}
 	
 	@GetMapping("/balance")
-    public ResponseEntity<String> getBalance() {
-        // If the code gets here, the JwtFilter worked!
-        return ResponseEntity.ok("Your current balance is secured by JWT.");
+    public ResponseEntity<String> getBalance(@AuthenticationPrincipal PaymentUserDetails userDetails) {
+        String name = userDetails.getUsername();
+        Double balance = userDetails.getBalance();
+        return ResponseEntity.ok("Hi " + name + " Your current balance is " + String.format("%.2f", balance));
     }
 
 }

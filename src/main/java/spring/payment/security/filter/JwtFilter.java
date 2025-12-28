@@ -55,7 +55,7 @@ public class JwtFilter extends OncePerRequestFilter {
 			List<SimpleGrantedAuthority> authorities = roles.stream()
 					.map(SimpleGrantedAuthority::new)
 					.collect(Collectors.toList());
-			Float balance = jwtUtil.extractBalance(jwt);
+			Double balance = jwtUtil.extractBalance(jwt);
 			
 			User user = new User();      // created to populate PaymentUserDetails
 			user.setUserName(username);

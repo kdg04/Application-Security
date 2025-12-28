@@ -23,7 +23,7 @@ public class User {
 	Long userId;
 	String userName;
 	String password;
-	Float balance;
+	Double balance;
 	
 	@ElementCollection(fetch = FetchType.EAGER)
 	@CollectionTable(name = "user_roles", joinColumns = {@JoinColumn(name = "user_id")})
@@ -31,7 +31,7 @@ public class User {
 	
 	public User() {}
 	
-	public User(String userName, String password, List<String> roles, float balance) {
+	public User(String userName, String password, List<String> roles, Double balance) {
 		this.userName = userName;
 		this.password = password;
 		this.balance = balance;
@@ -60,11 +60,11 @@ public class User {
 		return this.password;
 	}
 
-	public Float getBalance() {
+	public Double getBalance() {
 		return balance;
 	}
 
-	public Float setBalance(Float balance) {
+	public Double setBalance(Double balance) {
 		this.balance = balance;
 		return this.balance;
 	}

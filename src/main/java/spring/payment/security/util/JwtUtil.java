@@ -23,7 +23,7 @@ public class JwtUtil {
         this.key = Keys.hmacShaKeyFor(secret.getBytes());
     }
 	
-	public String generateToken(String username, List<String> roles, Float balance) {
+	public String generateToken(String username, List<String> roles, Double balance) {
 		return Jwts.builder()
 				.subject(username)
 				.claim("roles", roles)
@@ -60,6 +60,7 @@ public class JwtUtil {
 		}
 	}
 	
+	@SuppressWarnings("unchecked")
 	public List<String> extractRoles(String token) throws JwtInvalidTokenException {
 		try {
 			return Jwts.parser()
@@ -73,14 +74,14 @@ public class JwtUtil {
 		}
 	}
 	
-	public Float extractBalance(String token) throws JwtInvalidTokenException {
+	public Double extractBalance(String token) throws JwtInvalidTokenException {
 		try {
 			return Jwts.parser()
 			.verifyWith(key)
 			.build()
 			.parseSignedClaims(token)
 			.getPayload()
-			.get("balance", Float.class);
+			.get("balance", Double.class);
 		} catch (Exception e) {
 			throw new JwtInvalidTokenException(e);
 		}
